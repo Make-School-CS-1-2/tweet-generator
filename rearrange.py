@@ -3,8 +3,9 @@ import random
 
 
 def rearrange(args):
-    random.shuffle(args)
-    return args
+    output_list = args[:]
+    random.shuffle(output_list)
+    return output_list
 
 
 if __name__ == '__main__':

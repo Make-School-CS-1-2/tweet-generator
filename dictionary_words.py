@@ -9,11 +9,11 @@ def random_words(num_words):
     words = f.readlines()
 
     gen_string = []
-    for i in range(int(num_words)):
+    for i in range(num_words):
         gen_string.append(words[random.randint(0, len(words) - 1)].rstrip())
 
-    return gen_string
     f.close()
+    return gen_string
 
 
 if __name__ == '__main__':
