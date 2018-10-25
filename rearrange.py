@@ -1,8 +1,12 @@
 import sys
 import random
 
-words = sys.argv[1:len(sys.argv)]
 
-random.shuffle(words)
+def rearrange(args):
+    random.shuffle(args)
+    print(' '.join(args))
 
-print(' '.join(words))
+
+if __name__ == '__main__':
+    arguments = sys.argv[1:];
+    rearrange(arguments)
