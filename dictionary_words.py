@@ -1,18 +1,24 @@
-import sys
 import random
+import sys
 
-# Open the file
-f = open('/usr/share/dict/words', 'r')
-# Put the lines into an array
-words = f.readlines()
 
-# Grab the number of words to be in the sentence from argument
-numWords = sys.argv[1]
+def random_words(num_words):
+    # Open the file
+    f = open('/usr/share/dict/words', 'r')
+    # Put the lines into an array
+    words = f.readlines()
 
-gen_string = []
-for i in range(int(numWords)):
-    index = random.randint(0, len(words) - 1)
-    gen_string.append(words[index].rstrip())
+    gen_string = []
+    for i in range(int(num_words)):
+        gen_string.append(words[random.randint(0, len(words) - 1)].rstrip())
 
-print(' '.join(gen_string) + '.')
-f.close()
+    return gen_string
+    f.close()
+
+
+if __name__ == '__main__':
+    num_words = int(sys.argv[1])
+    output = random_words(num_words=num_words)
+    print(' '.join(output) + '.')
+
+
