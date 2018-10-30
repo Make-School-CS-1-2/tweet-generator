@@ -2,7 +2,10 @@ beginner_text = "one fish two fish red fish blue fish"
 
 
 def histogram(text):
-    words = text.split()
+    import string
+    table = str.maketrans({key: None for key in string.punctuation})
+    words = text.translate(table).split()
+
     histogram = [[words[0], 0]]
     for word in words:
         found = False
@@ -10,6 +13,9 @@ def histogram(text):
             if word in i[0]:
                 i[1] += 1
                 found = True
+                # print("updating %s to %d" % (i[0], i[1]))
+                # histogram.sort(key=lambda x: x[1], reverse=True)
+                break
         if not found:
             histogram.append([word, 1])
     return histogram

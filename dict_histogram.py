@@ -2,7 +2,9 @@ beginner_text = "one fish two fish red fish blue fish"
 
 
 def histogram(text):
-    words = text.split()
+    import string
+    table = str.maketrans({key: None for key in string.punctuation})
+    words = text.translate(table).split()
     histogram = {}
     for word in words:
         if word in histogram:
