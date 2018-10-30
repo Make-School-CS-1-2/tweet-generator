@@ -17,7 +17,9 @@ def unique_words(histogram):
 
 
 def frequency(word, histogram):
-    return histogram[word]
+    if word in histogram:
+        return histogram[word]
+    return 0
 
 
 if __name__ == '__main__':
@@ -26,6 +28,8 @@ if __name__ == '__main__':
 
     histogram = histogram(text)
 
+    search_word = "don"
+
     print("histogram:", histogram)
     print("number of unique words:", unique_words(histogram))
-    print("frequency of the word \"don\":", frequency("don", histogram))
+    print("frequency of the word \"%r\":" % search_word, frequency(search_word, histogram))
