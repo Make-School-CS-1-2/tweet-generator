@@ -9,9 +9,9 @@ def histogram(text):
     for word in words:
         found = False
         for i in range(len(histogram)):
-            if word in histogram[i][0] and not found:
-                old = histogram.pop(i)
-                histogram.append((word, old[1] + 1))
+            if word in histogram[i][0]:
+                old = histogram[i]
+                histogram[i] = (word, old[1] + 1)
                 break
         if not found:
             histogram.append((word, 1))
