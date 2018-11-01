@@ -16,10 +16,25 @@ def weighted_random_word(histogram):
     return word_list[random.randint(0, len(word_list) - 1)]
 
 
+def new_weighted_random_word(histogram):
+    count = random.randint(0, sum(histogram.values()))
+    for key, value in histogram.items():
+        count -= value
+        if count <= 0:
+            return key
+
+
 def check_randomness(histogram):
     words = ""
     for _ in range(1000):
         words += weighted_random_word(histogram) + " "
+    return dict_histogram.histogram(words)
+
+
+def check_new_randomness(histogram):
+    words = ""
+    for _ in range(1000):
+        words += new_weighted_random_word(histogram) + " "
     return dict_histogram.histogram(words)
 
 
@@ -31,3 +46,6 @@ if __name__ == '__main__':
     histogram = dict_histogram.histogram(text)
 
     print(weighted_random_word(histogram))
+    print(check_randomness(histogram))
+    print(new_weighted_random_word(histogram))
+    print(check_new_randomness(histogram))
