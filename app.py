@@ -16,6 +16,3 @@ def hello_world():
     for _ in range(10):
         sentence += " " + stochastic_sample.new_weighted_random_word(histogram)
     return sentence
-
-
-app.run()
