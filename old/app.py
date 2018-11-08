@@ -1,12 +1,11 @@
 from flask import Flask
-import stochastic_sample
-import dict_histogram
+from old import stochastic_sample, dict_histogram
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello_world():
-    import sys
     f = open('don-quixote.txt', mode='r', encoding='utf-8-sig')
     text = " ".join(f.read().split('\n')).lower()
 
