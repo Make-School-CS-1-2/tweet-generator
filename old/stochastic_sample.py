@@ -1,4 +1,4 @@
-import dict_histogram
+from old import dict_histogram
 import random
 
 beginner_text = "one fish two fish red fish blue fish"

@@ -1,6 +1,6 @@
 from flask import Flask
-import stochastic_sample
-import dict_histogram
+from old import stochastic_sample, dict_histogram
+
 app = Flask(__name__)
 
 
