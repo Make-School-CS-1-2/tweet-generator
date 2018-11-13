@@ -1,4 +1,4 @@
-from .dictogram import Dictogram
+from dictogram import Dictogram, print_histogram
 class MarkovChain(dict):
     """MarkovChain is a dictionary which holds Dictograms
      This shows the amount of times a word occurs after the chosen word"""
@@ -12,18 +12,19 @@ class MarkovChain(dict):
         # Done: Initialize from parameter
         if word_list is not None:
             prev = word_list[0]
-            for curr in word_list:
-                self.add_count(prev, curr)
+            for curr in word_list[1:]:
+                self.add_word(prev, curr)
                 prev = curr
             self.add_word(prev)
 
-    def add_word(self, word, following_word = ""):
+    def add_word(self, word, next_word = None):
         """Increase frequency count of given word and add a new pair if given"""
-        if word in self:
-            self[word].addCount(following_word)
-        else:
-            self[word] = 1
+        if word not in self:
             self.types += 1
+            if next_word:
+                self[word] = Dictogram([next_word])
+        elif next_word:
+            self[word].add_count(next_word)
         self.tokens += 1
 
     def frequency(self, word):
@@ -42,5 +43,11 @@ def print_markov_chain(word_list):
     for word in word_list[-2:]:
         freq = markov_chain.frequency(word)
         print('{!r} occurs {} times'.format(word, freq))
-        Dictogram.print_histogram(markov_chain[word])
+        print('{!r}  pairs:'.format(word))
+        print(markov_chain[word])
     print()
+
+
+if __name__ == "__main__":
+    word_list = list("abracadabra")
+    print_markov_chain(word_list)
