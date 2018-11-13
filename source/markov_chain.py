@@ -31,3 +31,16 @@ class MarkovChain(dict):
         if word in self:
             return self[word].tokens
         return 0
+
+
+def print_markov_chain(word_list):
+    print('word list: {}'.format(word_list))
+    # Create a MarkovChain and display its contents
+    markov_chain = MarkovChain(word_list)
+    print('MarkovChain: {}'.format(markov_chain))
+    print('{} tokens, {} types'.format(markov_chain.tokens, markov_chain.types))
+    for word in word_list[-2:]:
+        freq = markov_chain.frequency(word)
+        print('{!r} occurs {} times'.format(word, freq))
+        Dictogram.print_histogram(markov_chain[word])
+    print()
