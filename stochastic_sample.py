@@ -17,7 +17,7 @@ def weighted_random_word(histogram):
 
 
 def new_weighted_random_word(histogram):
-    count = random.randint(0, sum(histogram.values()))
+    count = random.randint(0, sum(histogram.values()))  # change the sum to a arg, this is reducing efficiency
     for key, value in histogram.items():
         count -= value
         if count <= 0:
