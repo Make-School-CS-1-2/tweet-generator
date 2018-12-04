@@ -59,7 +59,7 @@ class LinkedList(object):
         # DONE: Loop through all nodes and count one for each
         curr = self.head
         count = 0
-        while(curr):
+        while curr:
             count += 1
             curr = curr.next
         return count
