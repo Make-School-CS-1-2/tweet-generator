@@ -1,4 +1,4 @@
-from dictogram import Dictogram, print_histogram
+from source.dictogram import Dictogram, print_histogram
 class MarkovChain(dict):
     """MarkovChain is a dictionary which holds Dictograms
      This shows the amount of times a word occurs after the chosen word"""
