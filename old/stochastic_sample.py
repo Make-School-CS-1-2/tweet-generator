@@ -42,7 +42,7 @@ def check_randomness(chain):
 def check_new_randomness(chain, chain_sum):
     words = []
     for _ in range(1000):
-        words.append(new_weighted_random_word(chain, chain_sum))
+        words.append(new_weighted_random_histogram(chain, chain_sum))
     return MarkovChain(words)
 
 
@@ -51,6 +51,7 @@ def get_chain_sum(chain):
     for value in chain.values():
         chain_sum += value.tokens
     return chain_sum;
+
 
 def make_sentence(chain, number_of_words = 20):
     sentence = []
