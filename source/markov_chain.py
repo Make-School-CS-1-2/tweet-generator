@@ -11,20 +11,22 @@ class MarkovChain(dict):
         # Count words in given list, if any
         # Done: Initialize from parameter
         if word_list is not None:
-            prev = word_list[0]
-            for curr in word_list[1:]:
-                self.add_word(prev, curr)
-                prev = curr
-            self.add_word(prev)
+            prev1 = word_list[0]
+            prev2 = word_list[1]
+            for curr in word_list[2:]:
+                self.add_word((prev1, prev2), curr)
+                prev1 = prev2
+                prev2 = curr
+            self.add_word((prev1, prev2))
 
-    def add_word(self, word, next_word = None):
+    def add_word(self, pair, next_pair = None):
         """Increase frequency count of given word and add a new pair if given"""
-        if word not in self:
+        if pair not in self:
             self.types += 1
-            if next_word:
-                self[word] = Dictogram([next_word])
-        elif next_word:
-            self[word].add_count(next_word)
+            if next_pair:
+                self[pair] = Dictogram([next_pair])
+        elif next_pair:
+            self[pair].add_count(next_pair)
         self.tokens += 1
 
     def frequency(self, word):
@@ -40,11 +42,11 @@ def print_markov_chain(word_list):
     markov_chain = MarkovChain(word_list)
     print('MarkovChain: {}'.format(markov_chain))
     print('{} tokens, {} types'.format(markov_chain.tokens, markov_chain.types))
-    for word in word_list[-2:]:
-        freq = markov_chain.frequency(word)
-        print('{!r} occurs {} times'.format(word, freq))
-        print('{!r}  pairs:'.format(word))
-        print(markov_chain[word])
+    for index in range(len(word_list[-3:])):
+        freq = markov_chain.frequency((word_list[index], word_list[index + 1]))
+        print('{!r} occurs {} times'.format((word_list[index], word_list[index + 1]), freq))
+        print('{!r}  pairs:'.format((word_list[index], word_list[index + 1])))
+        print(markov_chain[(word_list[index], word_list[index + 1])])
     print()
 
 
