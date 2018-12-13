@@ -17,7 +17,7 @@ def weighted_random_word(chain):
 
 
 def new_weighted_random_histogram(chain, chain_sum):
-    count = random.randint(0, chain_sum)  # change the sum to a arg, this is reducing efficiency
+    count = random.randint(0, chain_sum) 
     for key, value in chain.items():
         count -= value.tokens
         if count <= 0:
