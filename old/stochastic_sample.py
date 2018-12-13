@@ -52,12 +52,11 @@ def get_chain_sum(chain):
         chain_sum += value.tokens
     return chain_sum;
 
-def make_sentence(chain):
+def make_sentence(chain, number_of_words = 20):
     sentence = []
     first_type = new_weighted_random_histogram(chain, get_chain_sum(chain))
     sentence.extend(first_type)
     for _ in range(20):
-        print(sentence)
         first_word = sentence[len(sentence) - 2]
         second_word = sentence[len(sentence) - 1]
         if (first_word, second_word) in chain.keys():
@@ -74,12 +73,10 @@ def make_sentence(chain):
 if __name__ == '__main__':
     import sys
     f = open(sys.argv[1], mode='r', encoding='utf-8-sig')
-    text = " ".join(f.read().split('\n')).lower()
+    text = " ".join(f.read().split('\n'))
     text = text.split(' ')
 
     chain = MarkovChain(text)
-
-    chain_sum = get_chain_sum(chain)
 
     # print(new_weighted_random_histogram(chain, chain_sum))
     # print(check_new_randomness(chain, chain_sum))
