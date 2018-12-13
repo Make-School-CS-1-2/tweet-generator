@@ -16,10 +16,18 @@ def weighted_random_word(chain):
     return word_list[random.randint(0, len(word_list) - 1)]
 
 
-def new_weighted_random_word(chain, chain_sum):
+def new_weighted_random_histogram(chain, chain_sum):
     count = random.randint(0, chain_sum)  # change the sum to a arg, this is reducing efficiency
     for key, value in chain.items():
         count -= value.tokens
+        if count <= 0:
+            return key
+
+
+def new_weighted_random_type(histogram):
+    count = random.randint(0, histogram.tokens)
+    for key, value in histogram.items():
+        count -= value
         if count <= 0:
             return key
 
@@ -44,6 +52,24 @@ def get_chain_sum(chain):
         chain_sum += value.tokens
     return chain_sum;
 
+def make_sentence(chain):
+    sentence = []
+    first_type = new_weighted_random_histogram(chain, get_chain_sum(chain))
+    sentence.extend(first_type)
+    for _ in range(20):
+        print(sentence)
+        first_word = sentence[len(sentence) - 2]
+        second_word = sentence[len(sentence) - 1]
+        if (first_word, second_word) in chain.keys():
+            add_type = new_weighted_random_type(chain[first_word, second_word])
+            sentence.append(add_type)
+        else:
+            break
+    return sentence
+
+
+
+
 
 if __name__ == '__main__':
     import sys
@@ -55,5 +81,6 @@ if __name__ == '__main__':
 
     chain_sum = get_chain_sum(chain)
 
-    print(new_weighted_random_word(chain, chain_sum))
-    print(check_new_randomness(chain, chain_sum))
+    # print(new_weighted_random_histogram(chain, chain_sum))
+    # print(check_new_randomness(chain, chain_sum))
+    print(' '.join(make_sentence(chain)))
